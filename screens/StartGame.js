@@ -1,7 +1,7 @@
 import { View, TextInput, Alert, StyleSheet } from "react-native";
 import React, { useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
-
+import Title from "../components/Title";
 const StartGame = (props) => {
   const [input, setinput] = useState("");
   const userinput = () => {
@@ -21,6 +21,8 @@ const StartGame = (props) => {
     setinput("");
   };
   return (
+    <View style={styles.root}>
+      <Title name="Number Guesser"/>
     <View style={styles.container}>
       <TextInput
         keyboardType="numeric"
@@ -30,12 +32,13 @@ const StartGame = (props) => {
         autoCorrect={false} //for mail/password input
         value={input}
         onChangeText={setinput}
-      />
+        />
       <View style={styles.btncontainer}>
         <PrimaryButton name="Reset" onPress={resetter} />
         <PrimaryButton name="Confirm" onPress={userinput} />
       </View>
     </View>
+</View>
   );
 };
 export default StartGame;
@@ -43,7 +46,7 @@ const styles = StyleSheet.create({
   container: {
     marginHorizontal: 16,
     padding: 16,
-    marginTop: 100,
+    marginTop: 36,
     backgroundColor: "#72063c",
     borderRadius: 6,
     elevation: 4,
@@ -66,4 +69,10 @@ const styles = StyleSheet.create({
     marginTop: 5,
     justifyContent: "space-between",
   },
+  root:{
+    flex:1,
+    alignItems:"center",
+    marginTop:100,
+
+  }
 });
