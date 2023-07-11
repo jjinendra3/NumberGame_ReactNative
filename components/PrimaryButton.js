@@ -1,10 +1,14 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
 
-const PrimaryButton = ({ name }) => {
+const PrimaryButton = ({ name, onPress }) => {
   return (
     <View style={styles.btnoutcontainer}>
-      <Pressable style={styles.container} android_ripple={{ color: "#ddabd0" }}>
+      <Pressable
+        style={styles.container}
+        android_ripple={{ color: "#ddabd0" }}
+        onPress={onPress}
+      >
         <Text style={styles.font}>{name}</Text>
       </Pressable>
     </View>
@@ -24,6 +28,7 @@ const styles = StyleSheet.create({
     elevation: 2,
     paddingHorizontal: 16,
     paddingVertical: 8,
+    alignItems: "center",
   },
   font: {
     fontSize: 18,

@@ -1,17 +1,25 @@
-import {
-  View,
-  Text,
-  TextInput,
-  Button,
-  FlatList,
-  Modal,
-  Alert,
-  StyleSheet,
-} from "react-native";
-import React from "react";
+import { View, TextInput, Alert, StyleSheet } from "react-native";
+import React, { useState } from "react";
 import PrimaryButton from "../components/PrimaryButton";
 
-const StartGame = () => {
+const StartGame = (props) => {
+  const [input, setinput] = useState("");
+  const userinput = () => {
+    const num = parseInt(input);
+    if (isNaN(num) || num < 0) {
+      Alert.alert("Not Valid", "Number Should be between 1 to 99", [
+        { text: "Okay", style: "cancel", onPress: resetter },
+      ]);
+      return;
+    } else {
+      props.setmodaler(true);
+      props.setnum(num);
+      resetter();
+    }
+  };
+  const resetter = () => {
+    setinput("");
+  };
   return (
     <View style={styles.container}>
       <TextInput
@@ -20,10 +28,12 @@ const StartGame = () => {
         style={styles.numberInput}
         autoCapitalize="none" //for mail input
         autoCorrect={false} //for mail/password input
+        value={input}
+        onChangeText={setinput}
       />
       <View style={styles.btncontainer}>
-        <PrimaryButton name="Reset" />
-        <PrimaryButton name="Confirm" />
+        <PrimaryButton name="Reset" onPress={resetter} />
+        <PrimaryButton name="Confirm" onPress={userinput} />
       </View>
     </View>
   );
