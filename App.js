@@ -4,24 +4,40 @@ import StartGame from "./screens/StartGame";
 import { useState } from "react";
 import { LinearGradient } from "expo-linear-gradient";
 import GameScreen from "./screens/GameScreen";
-import Title from "./components/Title";
-import GameOver from "./screens/GameOver"
+import GameOver from "./screens/GameOver";
+import { useFonts } from "expo-font"; //not using in this project
 export default function App() {
   const [first, setfirst] = useState(false);
   const [num, setnum] = useState();
-  const [gameover, setgameover] = useState(false)
+  const [gameover, setgameover] = useState(false);
+  const [guessrounds, setguessrounds] = useState(0);
   let screen = <StartGame setmodaler={setfirst} setnum={setnum} />;
   if (first) {
-    screen = <GameScreen setmodaler={()=>setfirst(false)} num={num} setgameover={()=>{setgameover(true);
-    setfirst(false);}} />;
+    screen = (
+      <GameScreen
+        setmodaler={() => setfirst(false)}
+        num={num}
+        setgameover={(total) => {
+          setguessrounds(total);
+          setgameover(true);
+          setfirst(false);
+        }}
+      />
+    );
   }
-  if(gameover){
-    screen=<GameOver setgameover={()=>{
-      setgameover(false);
-      setfirst(false);
-    }} num={num}/>
+  if (gameover) {
+    screen = (
+      <GameOver
+        setgameover={() => {
+          setgameover(false);
+          setfirst(false);
+        }}
+        num={num}
+        guess={guessrounds}
+      />
+    );
   }
-  
+
   return (
     <LinearGradient style={styles.container} colors={["#DA0641", "#FAD961"]}>
       <StatusBar style="light" />

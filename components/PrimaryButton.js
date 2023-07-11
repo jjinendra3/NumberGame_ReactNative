@@ -1,7 +1,14 @@
 import { View, Text, StyleSheet, Pressable } from "react-native";
 import React from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 const PrimaryButton = ({ name, onPress }) => {
+  if (name === "md-remove") {
+    name = <Ionicons name="md-remove" />;
+  }
+  if (name === "add") {
+    name = <Ionicons name="add" />;
+  }
   return (
     <View style={styles.btnoutcontainer}>
       <Pressable
