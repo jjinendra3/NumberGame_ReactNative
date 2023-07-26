@@ -15,8 +15,8 @@ const GameScreen = ({ num, setmodaler, setgameover }) => {
     } else {
       minB = 1;
       maxB = 100;
-      setgameover(guesslogs.length + 1);
-      return;
+      setgameover(guesslogs.length);
+      
     }
   };
   const initguess = randomGen(minB, maxB, num);
